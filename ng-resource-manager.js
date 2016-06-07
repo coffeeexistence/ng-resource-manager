@@ -10,18 +10,27 @@ angular.module('ng-resource-manager', [])
             var resourceTypeCache = service.findOrCreateType(resourceType);
             return {
                 exists: function(id) {
-                    return service.exists(resourceType, id);  
+                    if (service.exists(resourceType, id)){
+                        // console.log(resourceType+' '+id+' already exists.');
+                        return true;
+                    }
+                    
+                    return false;  
                 },
                 fetch: function(id) {
                     if(service.exists(resourceType, id)) {
+                        // console.log(resourceType+' '+id+' - fetched.');
                         return cache[resourceType][id];
                     }
+                    // console.log(resourceType+' '+id+' - not fetched.');
                     return false;
                 },
                 store: function(id, resource) {
+                    // console.log(resourceType+' '+resource+' - stored.');
                     resourceTypeCache[id] = resource;
                 }, 
                 merge: function(resourceBatch) {
+                    // console.log('merge completed');
                     angular.merge(resourceTypeCache, resourceBatch);
                 }
             };
@@ -64,8 +73,10 @@ angular.module('ng-resource-manager', [])
             var assimilate = function (newBatch) { // https://upload.wikimedia.org/wikipedia/en/a/a1/Picard_as_Locutus.jpg
                 cache.merge(newBatch);
                 for (var id in newBatch) {
-                    var promise = pendingRequests[id];
-                    promise.resolve( cache.fetch(id) );
+                    var promises = pendingRequests[id];
+                    promises.forEach(function (promise) {
+                        promise.resolve( cache.fetch(id) );
+                    });
                     delete pendingRequests[id];
                 }
             };
@@ -86,7 +97,12 @@ angular.module('ng-resource-manager', [])
             };
 
             var addToQueue = function (id, promise) {
-                pendingRequests[id] = promise;
+                if (pendingRequests[id]){
+                    pendingRequests[id].push(promise);
+                } else {
+                    pendingRequests[id] = [promise];
+                }
+                
                 if (!requestPending) { pendRequest(); }
             };
             
