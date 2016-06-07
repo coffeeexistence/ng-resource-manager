@@ -63,7 +63,6 @@ angular.module('ng-resource-manager', [])
         var service = this;
         
         service.create = function(collectorParams) {
-            var name = collectorParams.name;
             var httpBatchRequest = collectorParams.httpBatchRequest;
             var cache = collectorParams.cache;
             
@@ -127,10 +126,9 @@ angular.module('ng-resource-manager', [])
         var service = this;
         
         service.create = function(params){
-            var cache = Cache.create('users');
+            var cache = Cache.create(params.name);
   
             var collector = RequestCollector.create({
-                name: params.name, 
                 httpBatchRequest: params.httpBatchRequest, 
                 cache: cache
             });
