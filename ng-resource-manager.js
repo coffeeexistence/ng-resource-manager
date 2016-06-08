@@ -86,7 +86,6 @@ angular.module('ng-resource-manager', [])
                             } else { console.log('weird, could not fetch '+promises +' which had an id of '+id) }
                             delete pendingRequests[id];
                     }
-                    
                 };
 
                 var fetch = function () {
@@ -112,8 +111,7 @@ angular.module('ng-resource-manager', [])
                         }
                     }
                 }; 
-            }  
-            
+            };  
             
 
             var addToQueue = function (id, promise) {
