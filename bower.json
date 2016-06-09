@@ -1,6 +1,6 @@
 {
   "name": "ng-resource-manager",
-  "main": "dist/ng-resource-manager.min.js",
+  "main": "dist/ng-resource-manager.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/coffeeexistence/ng-resource-manager.git"
