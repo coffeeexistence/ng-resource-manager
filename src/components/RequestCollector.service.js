@@ -1,4 +1,4 @@
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ngrm.RequestCollector', [
         '$q', 
         '$timeout', 
@@ -16,7 +16,6 @@ angular.module('ng-resource-manager', [])
                     
                     var assimilate = function (newBatch) { // https://upload.wikimedia.org/wikipedia/en/a/a1/Picard_as_Locutus.jpg
                         cache.merge(newBatch);
-                        console.log(cache);
                         var resolvePromise = function (promise) {promise.resolve(cache.fetch(id));};
                         for (var id in newBatch) {
                             var promises = pendingRequests[id];
@@ -65,10 +64,8 @@ angular.module('ng-resource-manager', [])
                 return {
                     find: function (id) {
                         var q = $q.defer();
-
                         if (cache.exists(id)) { q.resolve(cache.fetch(id)); }
-                        else { addToQueue(id, q); console.log('adding to queue: '+id); }
-
+                        else { addToQueue(id, q); }
                         return q.promise;
                     }
                 };

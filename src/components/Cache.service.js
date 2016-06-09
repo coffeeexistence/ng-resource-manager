@@ -1,4 +1,4 @@
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ngrm.Cache', [
         function (){
             var service = this;
@@ -9,7 +9,6 @@ angular.module('ng-resource-manager', [])
                 return {
                     exists: function(id) {
                         if (service.exists(resourceType, id)){
-                            console.log(resourceType+' '+id+' already exists.');
                             return true;
                         }
                         
@@ -17,18 +16,14 @@ angular.module('ng-resource-manager', [])
                     },
                     fetch: function(id) {
                         if(service.exists(resourceType, id)) {
-                            console.log(resourceType+' '+id+' - fetched.');
                             return cache[resourceType][id];
                         }
-                        console.log(resourceType+' '+id+' - not fetched.');
                         return false;
                     },
                     store: function(id, resource) {
-                        console.log(resourceType+' '+resource+' - stored.');
                         resourceTypeCache[id] = resource;
                     }, 
                     merge: function(resourceBatch) {
-                        console.log('merge completed');
                         angular.merge(resourceTypeCache, resourceBatch);
                     },
                     

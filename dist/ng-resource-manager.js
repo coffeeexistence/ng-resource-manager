@@ -1,6 +1,6 @@
 angular.module('ng-resource-manager', [])
     .constant('MODULE_VERSION', '0.0.1');
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ngrm.Cache', [
         function (){
             var service = this;
@@ -11,7 +11,6 @@ angular.module('ng-resource-manager', [])
                 return {
                     exists: function(id) {
                         if (service.exists(resourceType, id)){
-                            console.log(resourceType+' '+id+' already exists.');
                             return true;
                         }
                         
@@ -19,18 +18,14 @@ angular.module('ng-resource-manager', [])
                     },
                     fetch: function(id) {
                         if(service.exists(resourceType, id)) {
-                            console.log(resourceType+' '+id+' - fetched.');
                             return cache[resourceType][id];
                         }
-                        console.log(resourceType+' '+id+' - not fetched.');
                         return false;
                     },
                     store: function(id, resource) {
-                        console.log(resourceType+' '+resource+' - stored.');
                         resourceTypeCache[id] = resource;
                     }, 
                     merge: function(resourceBatch) {
-                        console.log('merge completed');
                         angular.merge(resourceTypeCache, resourceBatch);
                     },
                     
@@ -55,7 +50,7 @@ angular.module('ng-resource-manager', [])
                 return false;
             };
         }]);
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ngrm.RequestCollector', [
         '$q', 
         '$timeout', 
@@ -73,7 +68,6 @@ angular.module('ng-resource-manager', [])
                     
                     var assimilate = function (newBatch) { // https://upload.wikimedia.org/wikipedia/en/a/a1/Picard_as_Locutus.jpg
                         cache.merge(newBatch);
-                        console.log(cache);
                         var resolvePromise = function (promise) {promise.resolve(cache.fetch(id));};
                         for (var id in newBatch) {
                             var promises = pendingRequests[id];
@@ -122,16 +116,14 @@ angular.module('ng-resource-manager', [])
                 return {
                     find: function (id) {
                         var q = $q.defer();
-
                         if (cache.exists(id)) { q.resolve(cache.fetch(id)); }
-                        else { addToQueue(id, q); console.log('adding to queue: '+id); }
-
+                        else { addToQueue(id, q); }
                         return q.promise;
                     }
                 };
             };
         }]);
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ResourceManager', [
         'ngrm.Cache',
         'ngrm.RequestCollector',
@@ -140,7 +132,6 @@ angular.module('ng-resource-manager', [])
             
             service.create = function(params){
                 var cache = Cache.create(params.name);
-    
                 var collector = RequestCollector.create({
                     httpBatchRequest: params.httpBatchRequest, 
                     cache: cache

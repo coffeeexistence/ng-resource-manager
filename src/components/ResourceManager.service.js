@@ -1,4 +1,4 @@
-angular.module('ng-resource-manager', [])
+angular.module('ng-resource-manager')
     .service('ResourceManager', [
         'ngrm.Cache',
         'ngrm.RequestCollector',
@@ -7,7 +7,6 @@ angular.module('ng-resource-manager', [])
             
             service.create = function(params){
                 var cache = Cache.create(params.name);
-    
                 var collector = RequestCollector.create({
                     httpBatchRequest: params.httpBatchRequest, 
                     cache: cache
