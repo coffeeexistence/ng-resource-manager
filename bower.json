@@ -27,6 +27,7 @@
     "bower.json",
     "Gruntfile.js",
     "src",
-    "README.md"
+    "README.md",
+    "package.json"
   ]
 }

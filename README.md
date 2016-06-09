@@ -19,6 +19,11 @@ initialized, `manager.find(id)` can be called multiple times from different
 parts of the application, and it will all be handled in one request, 50ms 
 after the first request is made. 
 
+##Installation 
+```bash
+bower install ng-resource-manager
+```
+
 
 ##Adding the module to your app
 ```javascript
@@ -53,7 +58,9 @@ object with the keys being the IDs of the resources requested.
 Simple and easy.
 
 ```javascript
-  users.show = function(id) { return userManager.find(id) };
+  var users = {
+    show: function(id) { return userManager.find(id) };
+  }
 ```
 
 #Contact
