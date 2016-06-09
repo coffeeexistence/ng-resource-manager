@@ -1,0 +1,24 @@
+{
+  "name": "ng-resource-manager",
+  "main": "ng-resource-manager.js",
+  "homepage": "https://github.com/coffeeexistence/ng-resource-manager",
+  "authors": [
+    "John Anthony Rivera <johnanthony.dev@gmail.com>"
+  ],
+  "description": "Speed-up loading time, reduce requests, and free-up backend overhead by means of Batching and Caching.",
+  "keywords": [
+    "http",
+    "batch",
+    "angular",
+    "cache",
+    "resource"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
