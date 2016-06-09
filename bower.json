@@ -1,6 +1,10 @@
 {
   "name": "ng-resource-manager",
-  "main": "ng-resource-manager.js",
+  "main": "dist/ng-resource-manager.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coffeeexistence/ng-resource-manager.git"
+  },
   "homepage": "https://github.com/coffeeexistence/ng-resource-manager",
   "authors": [
     "John Anthony Rivera <johnanthony.dev@gmail.com>"
@@ -19,6 +23,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "bower.json",
+    "Gruntfile.js",
+    "src",
+    "README.md"
   ]
 }
