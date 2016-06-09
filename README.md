@@ -1,4 +1,7 @@
 # ng-resource-manager
+
+(Tested on Angular 1.5.5) 
+
 Resource Manager allows web applications to speed-up loading time, 
 reduce requests, and free-up backend overhead by means of Batching 
 and Caching.
